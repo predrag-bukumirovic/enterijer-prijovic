@@ -1,0 +1,192 @@
+.header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 40;
+  padding: 0 var(--gutter);
+  color: #fff;
+  transition:
+    background-color 0.5s var(--ease),
+    color 0.5s var(--ease),
+    box-shadow 0.5s var(--ease);
+}
+
+.solid {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: saturate(1.2) blur(12px);
+  -webkit-backdrop-filter: saturate(1.2) blur(12px);
+  color: var(--ink);
+  box-shadow: 0 1px 0 rgba(43, 29, 19, 0.08);
+
+  .bar {
+    padding: 10px 0;
+  }
+
+  .bar::after {
+    opacity: 0;
+  }
+}
+
+.bar {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 14px 0;
+  transition: padding 0.5s var(--ease);
+
+  // Tanka linija ispod menija
+  &::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.45);
+    transform-origin: left;
+    transition: opacity 0.4s var(--ease);
+    animation: grow 1.4s var(--ease) 0.7s both;
+  }
+}
+
+.logo {
+  justify-self: start;
+  animation: fadeDown 1s var(--ease) 0.8s both;
+}
+
+.nav {
+  display: flex;
+  gap: clamp(20px, 2.6vw, 48px);
+
+  a {
+    animation: fadeDown 1s var(--ease) both;
+  }
+}
+
+.nav a,
+.contact {
+  position: relative;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 -4px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s var(--ease);
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+.contact {
+  justify-self: end;
+  animation: fadeDown 1s var(--ease) 1.25s both;
+}
+
+.toggle {
+  display: none;
+  justify-self: end;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 10px 0;
+}
+
+/* ---------- Mobilni meni ---------- */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--gutter) 40px;
+  background: var(--dark);
+  color: var(--cream);
+  clip-path: inset(0 0 100% 0);
+  visibility: hidden;
+  transition:
+    clip-path 0.8s var(--ease),
+    visibility 0s linear 0.8s;
+
+  &.open {
+    clip-path: inset(0);
+    visibility: visible;
+    transition: clip-path 0.8s var(--ease);
+  }
+}
+
+.overlayBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+  .toggle {
+    display: block;
+  }
+}
+
+.overlayNav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: clamp(32px, 7svh, 64px);
+
+  a {
+    font-family: var(--serif);
+    font-variation-settings: "wdth" 80;
+    font-size: clamp(40px, 12vw, 64px);
+    line-height: 1.1;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+      opacity 0.6s var(--ease),
+      transform 0.8s var(--ease);
+  }
+
+  .open & a {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .bar {
+    grid-template-columns: 1fr auto;
+  }
+
+  .nav,
+  .contact {
+    display: none;
+  }
+
+  .toggle {
+    display: block;
+    animation: fadeDown 1s var(--ease) 0.9s both;
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes grow {
+  from {
+    transform: scaleX(0);
+  }
+}

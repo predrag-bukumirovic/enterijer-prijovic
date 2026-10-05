@@ -1,0 +1,157 @@
+.instagram {
+  position: relative;
+  min-height: 100svh;
+  padding: calc(var(--header-h) + clamp(14px, 2.4svh, 30px)) var(--gutter) clamp(56px, 8svh, 96px);
+  background: var(--paper);
+}
+
+.head {
+  text-align: center;
+
+  :global(.label) {
+    margin-bottom: 10px;
+    font-size: 12px;
+  }
+
+  :global(.heading) {
+    font-size: clamp(34px, 4.1vw, 84px);
+  }
+}
+
+// Različite veličine i visine kao na referenci.
+.grid {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr 1fr 1fr;
+  align-items: start;
+  gap: 2.2vw;
+  margin-top: clamp(32px, 5svh, 64px);
+}
+
+.item:nth-child(1) .image {
+  aspect-ratio: 4 / 5.3;
+}
+
+.item:nth-child(n + 2) .image {
+  aspect-ratio: 4 / 5;
+}
+
+.item:nth-child(3) {
+  margin-top: 13vw;
+}
+
+.item:nth-child(4) {
+  margin-top: 3vw;
+}
+
+.image {
+  position: relative;
+  overflow: hidden;
+  background: var(--cream);
+
+  img {
+    object-fit: cover;
+  }
+}
+
+.hover {
+  position: absolute;
+  inset: 8%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.96);
+  text-align: center;
+  opacity: 0;
+  transform: scale(0.96);
+  transition:
+    opacity 0.6s var(--ease),
+    transform 0.8s var(--ease);
+
+  h3 {
+    font-family: var(--serif);
+    font-variation-settings: "wdth" 80;
+    font-weight: 400;
+    font-size: clamp(20px, 1.6vw, 30px);
+    line-height: 1.05;
+    text-transform: uppercase;
+  }
+
+  p {
+    max-width: 240px;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--text);
+  }
+}
+
+.more {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid currentColor;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+
+  svg {
+    width: 16px;
+  }
+}
+
+a:hover .hover,
+a:focus-visible .hover {
+  opacity: 1;
+  transform: none;
+}
+
+.title {
+  margin-top: 12px;
+  font-family: var(--serif);
+  font-variation-settings: "wdth" 80;
+  font-weight: 400;
+  font-size: clamp(15px, 1.15vw, 20px);
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.cta {
+  margin-top: clamp(40px, 6svh, 72px);
+  text-align: center;
+
+  :global(.text-link) {
+    text-transform: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .instagram {
+    min-height: 0;
+    padding-top: calc(var(--header-h) + 32px);
+  }
+
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 12px;
+  }
+
+  .item:nth-child(n) {
+    margin-top: 0;
+  }
+
+  .item:nth-child(even) {
+    margin-top: 40px;
+  }
+
+  .item:nth-child(n) .image {
+    aspect-ratio: 4 / 5;
+  }
+
+  .hover {
+    display: none;
+  }
+}
